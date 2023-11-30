@@ -187,29 +187,25 @@ else:
     st.write("Please set your OpenAI API Key in the .env file")
 
 
-uploaded_file = st.file_uploader("Upload a files", key="file_uploader",accept_multiple_files=False, type="pdf")
-x= 0
-if st.button("Upload File"):
-    x = 1
+uploaded_file = st.file_uploader("Upload a file", key="file_uploader", accept_multiple_files=False, type="pdf")
+
+if st.button("Upload and Extract Data"):
     if uploaded_file:
-            bytes_data =uploaded_file.read()
-            _ , file_extension = os.path.splitext(uploaded_file.name)
-            with open(uploaded_file.name,"wb") as f:
+        with st.spinner('Extracting data...'):
+            bytes_data = uploaded_file.read()
+            _, file_extension = os.path.splitext(uploaded_file.name)
+            with open(uploaded_file.name, "wb") as f:
                 f.write(bytes_data)
             loader = PyPDFLoader(uploaded_file.name)
-            data=loader.load()
-            st.session_state.text=data[0].page_content
+            data = loader.load()
+            st.session_state.text = data[0].page_content
             os.remove(uploaded_file.name)
 
+        prompt_in = prompt.format(st.session_state.text) + prompt_2
 
-prompt_in=prompt.format(st.session_state.text)+prompt_2
-if api_key_openai and uploaded_file and st.session_state.text:
-    if st.button('Extract Data'):
-        with st.spinner('Extracting data...'):
+        if api_key_openai and st.session_state.text:
             final = get_final_data(prompt_in)
             st.write(final)
             dataframe = json_to_dataframe(final)  # Convert JSON to DataFrame
             transposed_dataframe = dataframe.T  # Transpose the DataFrame
-            st.dataframe(transposed_dataframe)  
-        
-
+            st.dataframe(transposed_dataframe)
