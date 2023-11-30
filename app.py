@@ -64,17 +64,10 @@ RESPONSE FORMAT
       "email": ""
     },
     "bookingInformation": {
-      "airWaybillNo": {
-        "master": "",
-        "house": ""
-      },
+      "airWaybillNo": "",
       "referenceNumber": "",
       "bookingDate": "",
-      "orderNumber": {
-        "clae": "",
-        "agfae": "",
-        "customerPo": ""
-      }
+      "orderNumber": "",
     },
     "routingInstruction": {
       "airlineFlightNo": "",
