@@ -165,6 +165,6 @@ if st.button("Upload and Extract Data"):
         if api_key_openai and st.session_state.text:
             final = get_final_data(prompt_in)
             st.write(final)
-            dataframe = json_to_dataframe(final)  # Convert JSON to DataFrame
-            transposed_dataframe = dataframe.T  # Transpose the DataFrame
-            st.dataframe(transposed_dataframe)
+            #dataframe = json_to_dataframe(final)  # Convert JSON to DataFrame
+            #transposed_dataframe = dataframe.T  # Transpose the DataFrame
+            #st.dataframe(transposed_dataframe)
