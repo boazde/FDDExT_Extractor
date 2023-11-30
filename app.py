@@ -56,33 +56,66 @@ prompt_2="""
 RESPONSE FORMAT
 --------------
 {
-  "newBookingConfirmation": {
-    "customerInformation": {
-      "name": "",
-      "tel": "",
-      "address": "",
-      "email": ""
+    "wayBill": "",
+    "shipmentNumber": "",
+    "origin": {
+        "airportCode": "",
+        "portCode": ""
     },
-    "bookingInformation": {
-      "airWaybillNo": "",
-      "referenceNumber": "",
-      "bookingDate": "",
-      "orderNumber": "",
+    "destination": {
+        "airportCode": "",
+        "portCode": ""
     },
-    "routingInstruction": {
-      "airlineFlightNo": "",
-      "commodity": "",
-      "doorLocation": "",
-      "cutoffTenderDate": ""
+    "pickupDetails": {
+        "companyName": "",
+        "address": "",
+        "city": "",
+        "stateOrZip": "",
+        "contactInfo": {
+            "contactName": "",
+            "contactPhone": ""
+        },
+        "pickupTimeWindow": {
+            "startTime": "",
+            "endTime": ""
+        },
+        "accountNumber": ""
     },
-    "airportInformation": {
-      "departure": "",
-      "estimatedFlightDate": "",
-      "destination": "",
-      "estimatedArrivalDate": ""
+    "deliveryDetails": {
+        "receiverName": "",
+        "address": "",
+        "city": "",
+        "stateOrZip": "",
+        "contactInfo": {
+            "contactName": "",
+            "contactPhone": ""
+        },
+        "deliveryTimeWindow": {
+            "startTime": "",
+            "endTime": ""
+        },
+        "billingInfo": {
+            "billingName": "",
+            "billingAddress": "",
+            "billingCity": "",
+            "billingStateOrZip": "",
+            "billingAccountNumber": ""
+        },
+        "cargoDetails": {
+            "pieceCount": "",
+            "itemDescription": "",
+            "referenceNumbers": "",
+            "classification": "",
+            "grossWeight": "",
+            "dimensionalWeight": "",
+            "dimensions": "",
+            "bookedWeight": "",
+            "additionalServices": "",
+            "specialInstructions": ""
+        }
     }
-  }
 }
+	
 
 
 RESPONSE:
