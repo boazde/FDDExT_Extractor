@@ -1,25 +1,10 @@
-
-
 import streamlit as st
-#from pdf2image import convert_from_path
-#from PIL import Image
-#import tempfile
 import openai
 import streamlit as st
-import requests
-#import pdfkit
-import time
 from langchain.llms import OpenAI
-#import pinecone
 import os
 from dotenv import load_dotenv
-
-#import PyPDF2
-#from PyPDF2 import PdfReader
 from openai import OpenAI
-from langchain.memory import MongoDBChatMessageHistory
-from langchain.prompts import PromptTemplate
-from streamlit_chat import message
 import json
 from langchain.document_loaders import PyPDFLoader
 import base64
@@ -28,8 +13,6 @@ load_dotenv()
 
 
 def json_to_dataframe(json_data):
-    # Handle conversion here. This is a basic example.
-    # You may need to flatten the JSON or handle nested structures differently.
     return pd.json_normalize(json_data)
 
 prompt="""
@@ -176,7 +159,7 @@ if "loading" not in st.session_state:
 # if 'selected_items' not in st.session_state:
 #     st.session_state['selected_items'] = []
 
-st.set_page_config(page_title="ChatGPT-like Chat App", page_icon=":speech_balloon:")
+st.set_page_config(page_title="Freight Document Data Extraction Tool", page_icon="📄")
 
 
 api_key_openai = os.getenv('OPENAI_API_KEY')  # Replace with your environment variable name
@@ -186,8 +169,9 @@ if api_key_openai:
 else:
     st.write("Please set your OpenAI API Key in the .env file")
 
+st.title('Freight Document Data Extraction Tool')
 
-uploaded_file = st.file_uploader("Upload a file", key="file_uploader", accept_multiple_files=False, type="pdf")
+uploaded_file = st.file_uploader("", key="file_uploader", accept_multiple_files=False, type="pdf")
 
 if st.button("Upload and Extract Data"):
     if uploaded_file:
