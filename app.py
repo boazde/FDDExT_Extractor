@@ -12,9 +12,38 @@ import pandas as pd
 load_dotenv()
 
 
-def json_to_dataframe(json_data):
+def json_to_dataframe_b(json_data):
     return pd.json_normalize(json_data)
 
+def json_to_dataframe(json_data):
+    # Extract data from the JSON
+    customer_info = json_data.get("newBookingConfirmation", {}).get("customerInformation", {})
+    booking_info = json_data.get("newBookingConfirmation", {}).get("bookingInformation", {})
+    routing_info = json_data.get("newBookingConfirmation", {}).get("routingInstruction", {})
+    airport_info = json_data.get("newBookingConfirmation", {}).get("airportInformation", {})
+    
+    # Create a list to store DataFrames
+    dfs = []
+
+    # Populate the list with DataFrames
+    dfs.append(pd.DataFrame({"Category": ["NEW BOOKING CONFIRMATION"], "Attribute": [""], "Value": [""]}))
+    
+    dfs.append(pd.DataFrame({"Category": ["CUSTOMER INFORMATION"], "Attribute": ["NAME"], "Value": [customer_info.get("name", "")]}))
+    dfs.append(pd.DataFrame({"Category": ["CUSTOMER INFORMATION"], "Attribute": ["TEL"], "Value": [customer_info.get("tel", "")]}))
+    dfs.append(pd.DataFrame({"Category": ["CUSTOMER INFORMATION"], "Attribute": ["ADDRESS"], "Value": [customer_info.get("address", "")]}))
+    
+    dfs.append(pd.DataFrame({"Category": ["BOOKING INFORMATION"], "Attribute": ["AIR WAYBILL NO."], "Value": [booking_info.get("airWaybillNo", {}).get("master", "")]}))
+    dfs.append(pd.DataFrame({"Category": ["BOOKING INFORMATION"], "Attribute": ["REFERENCE NUMBER"], "Value": [booking_info.get("referenceNumber", "")]}))
+    
+    dfs.append(pd.DataFrame({"Category": ["ROUTING INSTRUCTION"], "Attribute": ["COMMODITY"], "Value": [routing_info.get("commodity", "")]}))
+    
+    dfs.append(pd.DataFrame({"Category": ["AIRPORT INFORMATION"], "Attribute": ["AIRPORT OF DEPARTURE"], "Value": [airport_info.get("departure", "")]}))
+    dfs.append(pd.DataFrame({"Category": ["AIRPORT INFORMATION"], "Attribute": ["AIRPORT OF DESTINATION"], "Value": [airport_info.get("destination", "")]}))
+
+    # Concatenate the DataFrames
+    result_df = pd.concat(dfs, ignore_index=True)
+    
+    return result_df
 prompt="""
 Please extract information from the provided text, which is extracted from a PDF file of airfreight labels, manifests, house air waybills, or trucking bills of lading. The extracted data should be formatted into the given JSON structure.If any values from the structured json is missing remove that alos in the output. The output must strictly be in JSON format without any additional text before or after it. Use only the values from the given text, and if a value is not available, please input "N/A" for that respective field. It's crucial to strictly adhere to the values present in the provided text.
 
@@ -167,4 +196,4 @@ if st.button("Upload and Extract Data"):
             st.write(final)
             #dataframe = json_to_dataframe(final)  # Convert JSON to DataFrame
             #transposed_dataframe = dataframe.T  # Transpose the DataFrame
-            #st.dataframe(transposed_dataframe)
+            #st.dataframe(dataframe)
