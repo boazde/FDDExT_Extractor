@@ -187,9 +187,9 @@ else:
     st.write("Please set your OpenAI API Key in the .env file")
 
 
-uploaded_file = st.sidebar.file_uploader("Upload a files", key="file_uploader",accept_multiple_files=False, type="pdf")
+uploaded_file = st.file_uploader("Upload a files", key="file_uploader",accept_multiple_files=False, type="pdf")
 x= 0
-if st.sidebar.button("Upload File"):
+if st.button("Upload File"):
     x = 1
     if uploaded_file:
             bytes_data =uploaded_file.read()
