@@ -27,63 +27,39 @@ prompt_2="""
 RESPONSE FORMAT
 --------------
 {
-    "shipmentNumber": "",
-    "origin": {
-        "airportCode": "",
-        "portCode": ""
+  "newBookingConfirmation": {
+    "customerInformation": {
+      "name": "",
+      "tel": "",
+      "address": "",
+      "email": ""
     },
-    "destination": {
-        "airportCode": "",
-        "portCode": ""
+    "bookingInformation": {
+      "airWaybillNo": {
+        "master": "",
+        "house": ""
+      },
+      "referenceNumber": "",
+      "bookingDate": "",
+      "orderNumber": {
+        "clae": "",
+        "agfae": "",
+        "customerPo": ""
+      }
     },
-    "pickupDetails": {
-        "companyName": "",
-        "address": "",
-        "city": "",
-        "stateOrZip": "",
-        "contactInfo": {
-            "contactName": "",
-            "contactPhone": ""
-        },
-        "pickupTimeWindow": {
-            "startTime": "",
-            "endTime": ""
-        },
-        "accountNumber": ""
+    "routingInstruction": {
+      "airlineFlightNo": "",
+      "commodity": "",
+      "doorLocation": "",
+      "cutoffTenderDate": ""
     },
-    "deliveryDetails": {
-        "receiverName": "",
-        "address": "",
-        "city": "",
-        "stateOrZip": "",
-        "contactInfo": {
-            "contactName": "",
-            "contactPhone": ""
-        },
-        "deliveryTimeWindow": {
-            "startTime": "",
-            "endTime": ""
-        },
-        "billingInfo": {
-            "billingName": "",
-            "billingAddress": "",
-            "billingCity": "",
-            "billingStateOrZip": "",
-            "billingAccountNumber": ""
-        },
-        "cargoDetails": {
-            "pieceCount": "",
-            "itemDescription": "",
-            "referenceNumbers": "",
-            "classification": "",
-            "grossWeight": "",
-            "dimensionalWeight": "",
-            "dimensions": "",
-            "bookedWeight": "",
-            "additionalServices": "",
-            "specialInstructions": ""
-        }
+    "airportInformation": {
+      "departure": "",
+      "estimatedFlightDate": "",
+      "destination": "",
+      "estimatedArrivalDate": ""
     }
+  }
 }
 
 
