@@ -106,11 +106,10 @@ def get_final_data(prompt_new):
         return "Internal error with Open AI"
     
 def remove_na_values(data):
-   
     if isinstance(data, dict):
         return {k: remove_na_values(v) for k, v in data.items() if v != 'N/A'}
     elif isinstance(data, list):
-        return [remove_na_values(item) for item in data]
+        return [remove_na_values(item) for item in data if item != 'N/A']
     else:
         return data
     
