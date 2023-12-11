@@ -24,80 +24,92 @@ import base64
 
 
 prompt="""
-Please extract information from the provided text, which is extracted from a PDF file of airfreight labels, manifests, house air waybills, or trucking bills of lading. The extracted data should be formatted into the given JSON structure.If any values from the structured json is missing remove that alos in the output. The output must strictly be in JSON format without any additional text before or after it. Use only the values from the given text, and if a value is not available, please input "N/A" for that respective field. It's crucial to strictly adhere to the values present in the provided text.
+Please extract information from the provided text, which is extracted from a PDF file of airfreight labels, manifests, house air waybills, or trucking bills of lading. The extracted data should be formatted into the given JSON structure. The output must strictly be in JSON format without any additional text before or after it. It's crucial to strictly adhere to the values present in the provided text.
 
 Text: {}
 
 """
-
 prompt_2="""
-
-RESPONSE FORMAT
---------------
-{
-    "shipmentNumber": "",
-    "origin": {
-        "airportCode": "",
-        "portCode": ""
-    },
-    "destination": {
-        "airportCode": "",
-        "portCode": ""
-    },
-    "pickupDetails": {
-        "companyName": "",
-        "address": "",
-        "city": "",
-        "stateOrZip": "",
-        "contactInfo": {
-            "contactName": "",
-            "contactPhone": ""
-        },
-        "pickupTimeWindow": {
-            "startTime": "",
-            "endTime": ""
-        },
-        "accountNumber": ""
-    },
-    "deliveryDetails": {
-        "receiverName": "",
-        "address": "",
-        "city": "",
-        "stateOrZip": "",
-        "contactInfo": {
-            "contactName": "",
-            "contactPhone": ""
-        },
-        "deliveryTimeWindow": {
-            "startTime": "",
-            "endTime": ""
-        },
-        "billingInfo": {
-            "billingName": "",
-            "billingAddress": "",
-            "billingCity": "",
-            "billingStateOrZip": "",
-            "billingAccountNumber": ""
-        },
-        "cargoDetails": {
-            "pieceCount": "",
-            "itemDescription": "",
-            "referenceNumbers": "",
-            "classification": "",
-            "grossWeight": "",
-            "dimensionalWeight": "",
-            "dimensions": "",
-            "bookedWeight": "",
-            "additionalServices": "",
-            "specialInstructions": ""
-        }
+    RESPONSE FORMAT
+    --------------
+   {
+    "key1": "",
+    "key2":"",
+    "key3":"",
+    "key4":"",
+    
     }
-}
 
-
-RESPONSE:
-
+ RESPONSE:   
 """
+# prompt_2="""
+
+# RESPONSE FORMAT
+# --------------
+# {
+#     "shipmentNumber": "",
+#     "origin": {
+#         "airportCode": "",
+#         "portCode": ""
+#     },
+#     "destination": {
+#         "airportCode": "",
+#         "portCode": ""
+#     },
+#     "pickupDetails": {
+#         "companyName": "",
+#         "address": "",
+#         "city": "",
+#         "stateOrZip": "",
+#         "contactInfo": {
+#             "contactName": "",
+#             "contactPhone": ""
+#         },
+#         "pickupTimeWindow": {
+#             "startTime": "",
+#             "endTime": ""
+#         },
+#         "accountNumber": ""
+#     },
+#     "deliveryDetails": {
+#         "receiverName": "",
+#         "address": "",
+#         "city": "",
+#         "stateOrZip": "",
+#         "contactInfo": {
+#             "contactName": "",
+#             "contactPhone": ""
+#         },
+#         "deliveryTimeWindow": {
+#             "startTime": "",
+#             "endTime": ""
+#         },
+#         "billingInfo": {
+#             "billingName": "",
+#             "billingAddress": "",
+#             "billingCity": "",
+#             "billingStateOrZip": "",
+#             "billingAccountNumber": ""
+#         },
+#         "cargoDetails": {
+#             "pieceCount": "",
+#             "itemDescription": "",
+#             "referenceNumbers": "",
+#             "classification": "",
+#             "grossWeight": "",
+#             "dimensionalWeight": "",
+#             "dimensions": "",
+#             "bookedWeight": "",
+#             "additionalServices": "",
+#             "specialInstructions": ""
+#         }
+#     }
+# }
+
+
+# RESPONSE:
+
+# """
 def get_response_from_openai(prompt_in):
   try:
     # print(prompt_in)
@@ -180,7 +192,7 @@ else:
    st.write("Please add your OpenAI API Key")
 
 
-uploaded_file = st.sidebar.file_uploader("Upload a files to pinecone", key="file_uploader",accept_multiple_files=False, type="pdf")
+uploaded_file = st.sidebar.file_uploader("Upload a file", key="file_uploader",accept_multiple_files=False, type="pdf")
 x= 0
 if st.sidebar.button("Upload File"):
     x = 1
